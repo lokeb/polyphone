@@ -104,6 +104,7 @@ void GraphicsWavePainter::setData(QByteArray baData)
 
 void GraphicsWavePainter::paint(quint32 start, quint32 end, float zoomY)
 {
+
     if (start >= _sampleSize)
         start = _sampleSize - 1;
     if (end >= _sampleSize)
@@ -138,7 +139,7 @@ void GraphicsWavePainter::paint(quint32 start, quint32 end, float zoomY)
         // Add the mean value
         painter.setPen(QPen(QColor(_waveColor), 1.0, Qt::SolidLine));
         painter.setRenderHint(QPainter::Antialiasing);
-        painter.drawPolyline(_samplePlotMean, _widget->width());
+//        painter.drawPolyline(_samplePlotMean, _widget->width());
     }
 }
 

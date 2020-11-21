@@ -87,6 +87,11 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
     _renameAction->setShortcut(Qt::Key_F2);
     connect(_renameAction, SIGNAL(triggered()), this, SLOT(rename()));
     this->addAction(_renameAction);
+
+    // Extract
+    _extractAction = new QAction(tr("Ex&tract..."), this);
+    connect(_extractAction, SIGNAL(triggered()), this, SLOT(extract()));
+    this->addAction(_extractAction);
 }
 
 TreeViewMenu::~TreeViewMenu()
@@ -497,3 +502,10 @@ void TreeViewMenu::duplicate()
         emit(selectionChanged(newIds));
     }
 }
+
+void TreeViewMenu::extract()
+{
+    if (_currentIds.count() == 1)
+        _dialogList->showDialog(_currentIds[0], false);
+}
+

@@ -4,3 +4,8 @@
 /build-*
 lib_*
 .DS_Store
+*.o
+ui_*.h
+moc_*.cpp
+moc_*.h
+

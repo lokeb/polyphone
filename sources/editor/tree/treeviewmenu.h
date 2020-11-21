@@ -52,6 +52,7 @@ public slots:
     void duplicate();
     void remove();
     void rename();
+    void extract();
 
 private slots:
     void bulkRename(int renameType, QString text1, QString text2, int val1, int val2);
@@ -69,6 +70,7 @@ private:
     QAction * _duplicateAction;
     QAction * _removeAction;
     QAction * _renameAction;
+    QAction * _extractAction;
     DialogList * _dialogList;
 
     // Same copy for all instances

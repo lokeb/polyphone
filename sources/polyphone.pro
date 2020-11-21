@@ -102,15 +102,26 @@ unix:!macx {
                 install_desktop install_appdata install_mime install_man install_doc
 }
 macx {
+    CONFIG+=sdk_no_version_check
     QMAKE_CXXFLAGS += -std=c++11
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
-    QMAKE_MAC_SDK = macosx10.14
+
+
     DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
     INCLUDEPATH += ../lib_mac/Jackmp.framework/Headers \
-        ../lib_mac/include
-    LIBS += -L$$PWD/../lib_mac -lportaudio -logg -lFLAC -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
+        ../lib_mac/include \
+        /usr/local/include \
+        /usr/local/include/jack \
+        /usr/local/opt/openssl@1.1/include
+
+    LIBS += -L$$PWD/../lib_mac -lportaudio -logg -lFLAC -lvorbis -lvorbisfile -lvorbisenc -lssl -lcrypto -F$$PWD/../lib_mac/ \#-framework Jackmp \
+        /usr/local/opt/jack/lib/libjack.dylib \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
-        -framework AudioUnit -framework AudioToolbox -framework Cocoa -lz
+        -framework AudioUnit -framework AudioToolbox -framework Cocoa -lz \
+        -L/usr/local/lib \
+        -L/usr/local/opt/openssl@1.1/lib
+
+
     ICON = polyphone.icns
     QMAKE_INFO_PLIST = polyphone.plist
     DESTDIR = $$PWD/../lib_mac
@@ -970,6 +981,7 @@ FORMS += \
     repository/soundfont/uploadingdialog.ui
 
 DISTFILES += \
+    ../ToDo.md \
     changelog
 
 RESOURCES += resources.qrc
